@@ -42,11 +42,11 @@ export default function Property({ initialValue, onChange }: IProps) {
             options={[
               {
                 label: "GET",
-                value: "GET",
+                value: "get",
               },
               {
                 label: "POST",
-                value: "POST",
+                value: "post",
               },
             ]}
           />
@@ -90,7 +90,7 @@ export default function Property({ initialValue, onChange }: IProps) {
             actionName: "fetch",
             type: "other",
             defaultState: 0,
-            method: "GET",
+            method: "get",
             ...initialValue,
           }}
           autoComplete="off"

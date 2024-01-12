@@ -27,14 +27,14 @@ export default function getScriptTemplate(
   
      const fetchInfo = _eventData.props[this._state];
       if (fetchInfo) {
-        fetch(fetchInfo.url, {
-          method: fetchInfo.method || 'GET',
-          body: JSON.stringify(fetchInfo.json),
-        }).then(res=>{
-          if(_eventData.type==='switch'){
-              this._state = +!this._state;
-          }
-        })
+      XHTTP[fetchInfo.method](fetchInfo.url, fetchInfo.json, response => {
+    console.log('xhttpres ' + response);
+    if(_eventData.type==='switch'){
+        this._state = +!this._state;
+    }
+}, msg => {
+    console.log('xhttperr: ' + msg);
+});
       }
     };
     onStart() {
