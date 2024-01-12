@@ -50,4 +50,10 @@ export default defineConfig({
   esbuild: {
     drop: process.env.BUILD_ENV === "dev" ? [] : ["console", "debugger"],
   },
+  define: {
+    "process.env.MAIN_ENV": JSON.stringify(process.env.MAIN_ENV),
+    // 'process.env.NODE_ENV': process.env.VITE_USER_NODE_ENV,
+    "process.env.NODE_ENV":
+      process.env.BUILD_ENV === "dev" ? undefined : "'production'",
+  },
 });
