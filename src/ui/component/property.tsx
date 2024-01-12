@@ -1,14 +1,14 @@
-import { IEventData } from "@/type";
+import { IEventData, IProps, IPropsType } from "@/type";
 import { Card, ConfigProvider, Form, Input, Select, Space } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import React from "react";
 
-interface IProps {
+interface IPropertyProps {
   initialValue?: IEventData;
   onChange: (eventData: IEventData) => void;
 }
 
-export default function Property({ initialValue, onChange }: IProps) {
+export default function Property({ initialValue, onChange }: IPropertyProps) {
   const renderPropsItem = (index: number) => {
     return (
       <>
@@ -96,6 +96,15 @@ export default function Property({ initialValue, onChange }: IProps) {
           autoComplete="off"
           style={{ marginTop: "20px" }}
           onValuesChange={(changedValues, allValues) => {
+            const props = allValues.props;
+            if (props) {
+              allValues.props = props.filter((item: IProps) => {
+                return (
+                  item &&
+                  Object.keys(item).some((key) => item[key as keyof IProps])
+                );
+              });
+            }
             onChange(allValues);
           }}
         >
