@@ -21,15 +21,15 @@ export default function getScriptTemplate(
   const str = `
   data:text/javascript;charset=utf-8,
   class TransitionScript_${classId} extends SceneBehavior {
-    _eventData = ${eventData}
-    _state = ${parsedEventData.defaultState}
+    _eventData = ${eventData};
+    _state = ${parsedEventData.defaultState ?? 0};
     _callback = () => {
   
-     const fetchInfo = _eventData.props[this._state];
+     const fetchInfo = this._eventData.props[this._state];
       if (fetchInfo) {
       XHTTP[fetchInfo.method](fetchInfo.url, fetchInfo.json, response => {
     console.log('xhttpres ' + response);
-    if(_eventData.type==='switch'){
+    if(this._eventData.type==='switch'){
         this._state = +!this._state;
     }
 }, msg => {
